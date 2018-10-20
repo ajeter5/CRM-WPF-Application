@@ -1,0 +1,15 @@
+C:\Users\ajete\source\repos\Customer Relationship Management Application\Customer Relationship Management Application\obj\Debug\MainWindow.g.cs
+C:\Users\ajete\source\repos\Customer Relationship Management Application\Customer Relationship Management Application\obj\Debug\App.g.cs
+C:\Users\ajete\source\repos\Customer Relationship Management Application\Customer Relationship Management Application\obj\Debug\Customer Relationship Management Application_MarkupCompile.cache
+C:\Users\ajete\source\repos\Customer Relationship Management Application\Customer Relationship Management Application\obj\Debug\Customer Relationship Management Application_MarkupCompile.lref
+C:\Users\ajete\source\repos\Customer Relationship Management Application\Customer Relationship Management Application\bin\Debug\Customer Relationship Management Application.exe.config
+C:\Users\ajete\source\repos\Customer Relationship Management Application\Customer Relationship Management Application\bin\Debug\Customer Relationship Management Application.exe
+C:\Users\ajete\source\repos\Customer Relationship Management Application\Customer Relationship Management Application\bin\Debug\Customer Relationship Management Application.pdb
+C:\Users\ajete\source\repos\Customer Relationship Management Application\Customer Relationship Management Application\obj\Debug\MainWindow.baml
+C:\Users\ajete\source\repos\Customer Relationship Management Application\Customer Relationship Management Application\obj\Debug\Customer Relationship Management Application.g.resources
+C:\Users\ajete\source\repos\Customer Relationship Management Application\Customer Relationship Management Application\obj\Debug\Customer_Relationship_Management_Application.Properties.Resources.resources
+C:\Users\ajete\source\repos\Customer Relationship Management Application\Customer Relationship Management Application\obj\Debug\Customer Relationship Management Application.csproj.GenerateResource.cache
+C:\Users\ajete\source\repos\Customer Relationship Management Application\Customer Relationship Management Application\obj\Debug\Customer Relationship Management Application.csproj.CoreCompileInputs.cache
+C:\Users\ajete\source\repos\Customer Relationship Management Application\Customer Relationship Management Application\obj\Debug\Customer Relationship Management Application.exe
+C:\Users\ajete\source\repos\Customer Relationship Management Application\Customer Relationship Management Application\obj\Debug\Customer Relationship Management Application.pdb
+C:\Users\ajete\source\repos\Customer Relationship Management Application\Customer Relationship Management Application\obj\Debug\Customer Relationship Management Application.csprojAssemblyReference.cache
