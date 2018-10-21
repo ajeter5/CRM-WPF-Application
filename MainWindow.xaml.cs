@@ -17,6 +17,8 @@ using System.Data.Common;
 using System.Data.Sql;
 using System.Data.SqlClient;
 using System.Data.SqlTypes;
+using System.Threading;
+using System.Text.RegularExpressions;
 
 namespace Customer_Relationship_Management_Application
 {
@@ -26,7 +28,7 @@ namespace Customer_Relationship_Management_Application
     public partial class MainWindow : Window
     {
         public MainWindow()
-        {
+        {            
             InitializeComponent();
             
             //This method calls the CreateDatabase method to create the database and tables
@@ -83,16 +85,24 @@ namespace Customer_Relationship_Management_Application
         //The event handler for when the Submit button is clicked
         private void SubmitButton_Click(object sender, RoutedEventArgs e)
         {
-            //Test if either radio button is checked and the Name and Email textboxes contain values
-            if ((CustomerRadioButton.IsChecked == true || ProspectiveCustomerRadioButton.IsChecked == true)  && (NameTextBox.Text.Length > 0 && EmailTextBox.Text.Length > 0))
+            string name = NameTextBox.Text.ToString();
+            int age = (int)AgeComboBox.SelectedValue;
+            string gender = (string)GenderComboBox.SelectedValue;
+            string email = (string)EmailTextBox.Text;
+
+            //Use Regular Expression to validate email format.
+            string emailPattern =
+"^([0-9a-zA-Z]([-\\.\\w]*[0-9a-zA-Z])*@([0-9a-zA-Z][-\\w]*[0-9a-zA-Z]\\.)+[a-zA-Z]{2,9})$";
+            bool emailMatch = Regex.IsMatch(email, emailPattern);
+                        
+            //Data Validation:
+            //Test if either of the two radio button are checked, Name contains at least 2 characters, and the Email textbox value is valid. Email is validated with regular a expression above.
+                if ((CustomerRadioButton.IsChecked == true || ProspectiveCustomerRadioButton.IsChecked == true) && (NameTextBox.Text.Length > 1 && emailMatch == true))
             {
+                
                 SqlConnection connection = new SqlConnection("Server=localhost;Database=;Trusted_Connection=True;");
                 connection.Open();
-                string name = NameTextBox.Text.ToString();
-                int age = (int)AgeComboBox.SelectedValue;
-                string gender = (string)GenderComboBox.SelectedValue;
-                string email = (string)EmailTextBox.Text;
-
+                
                 //If the Customer Radio Button is checked submit the input data to the database
                 if (CustomerRadioButton.IsChecked == true)
                 {
@@ -102,30 +112,32 @@ namespace Customer_Relationship_Management_Application
                     {
                         string createPerson = @"INSERT INTO [CRMDatabase].[dbo].[Person]" +
                             "([Name]," +
-                            "[AGE]," +
+                            "[Age]," +
                             "[Gender]," +
                             "[Email])" + 
                             "VALUES('" + name + "', '" + age + "', '" + gender + "', '" + email + "' ); " +
                             "INSERT INTO [CRMDatabase].[dbo].[Customer] " +
                             "([Name]," +
-                            "[AGE]," +
+                            "[Age]," +
                             "[Gender]," +
                             "[Email]," +
                             "[CustomerStatus])" +
                             "VALUES('" + name + "', '" + age + "', '" + gender + "', '" + email + "', '" +   customerStatus + "' );";
 
+                        //Create SQL Server connection to the machine's local host and load the inputted data into the database.
                         SqlCommand customerSqlCommand = new SqlCommand(createPerson, connection);
 
-                        if ((string)CustomerStatusComboBox.SelectedItem == "Select" || (string)GenderComboBox.SelectedItem == "Select")
-                        {
-                            MessageBox.Show("Please select a Gender and Customer Status.", "Customer Relationship Management", MessageBoxButton.OK);
-                        }
-                        else
-                        {
                             customerSqlCommand.ExecuteNonQuery();
                             MessageBox.Show("Success! You have created a Customer.", "Customer Relationship Management", MessageBoxButton.OK);
-                            ClearAllFields();
-                        }
+
+                        //Create a new Customer object
+                            Customer customer = new Customer(name, age, gender, email, customerStatus);
+
+                        //Add the Cutomer to the CustomersListBox
+                        CustomersListBox.Items.Add(string.Format("Customer: {0}\n\tAge: {1}\n\tGender: {2}\n\tEmail: {3}\n\tStatus: {4}", customer.Name, customer.Age, customer.Gender, customer.Email, customer.CustomerStatus));
+
+                        //Clear all form fields
+                        ClearAllFields();
                     }
                 }
 
@@ -133,40 +145,44 @@ namespace Customer_Relationship_Management_Application
                 else if (ProspectiveCustomerRadioButton.IsChecked == true)
                 {
                     string communicationChannel = (string)CommunicationChannelComboBox.SelectedValue;
-                        
+
                     using (connection)
                     {
                         string createProspectiveCustomer = @"INSERT INTO [CRMDatabase].[dbo].[Person]" +
                             "([Name]," +
-                            "[AGE]," +
+                            "[Age]," +
                             "[Gender]," +
                             "[Email])" +
                             "VALUES('" + name + "', '" + age + "', '" + gender + "', '" + email + "' ); " +
                             "INSERT INTO [CRMDatabase].[dbo].[Prospect] " +
                             "([Name]," +
-                            "[AGE]," +
+                            "[Age]," +
                             "[Gender]," +
                             "[Email]," +
                             "[CommunicationChannel])" +
-                            "VALUES('" + name + "', '" + age + "', '" + gender + "', '" + email + "', '" +   communicationChannel + "' );";
-                        SqlCommand prospectiveCustomerSqlCommand = new SqlCommand(createProspectiveCustomer, connection);
+                            "VALUES('" + name + "', '" + age + "', '" + gender + "', '" + email + "', '" + communicationChannel + "' );";
 
-                        if ((string)CommunicationChannelComboBox.SelectedItem == "Select" || (string)GenderComboBox.SelectedItem == "Select")
-                        {
-                            MessageBox.Show("Please select a Gender and how you found us.", "Customer Relationship Management", MessageBoxButton.OK);
-                        }
-                        else
-                        {
-                            prospectiveCustomerSqlCommand.ExecuteNonQuery();
-                            MessageBox.Show("Success! You have created a Prospective Customer.", "Customer Relationship Management", MessageBoxButton.OK);
-                            ClearAllFields();
-                        }
+                        //Create SQL Server connection to the machine's local host and load the inputted data into the database.
+                        SqlCommand prospectiveCustomerSqlCommand = new SqlCommand(createProspectiveCustomer, connection);
+                        prospectiveCustomerSqlCommand.ExecuteNonQuery();
+
+                        MessageBox.Show("Success! You have created a Prospective Customer.", "Customer Relationship Management", MessageBoxButton.OK);
+
+                        //Create a new Customer object
+                        Prospect prospect = new Prospect(name, age, gender, email, communicationChannel);
+
+                        //Add the Prospective cutomer to the ProspectiveCustomersListBox
+                        ProspectiveCustomersListBox.Items.Add(string.Format("Prospect: {0}\n\tAge: {1}\n\tGender: {2}\n\tEmail: {3}\n\tHow you found us: {4}", prospect.Name, prospect.Age, prospect.Gender, prospect.Email, prospect.CommunicationChannel));
+
+                        //Clear all form fields
+                        ClearAllFields();
                     }
                 }
             }
             else
             {
-                MessageBox.Show("Please select a Customer or Prospective Customer and enter Name and an Email.", "Customer Relationship Management", MessageBoxButton.OK);
+                //Message box to show if either radio button is not checked and/or email is not valid
+                MessageBox.Show("Please select a Customer or Prospective Customer, a valid Name and Email.", "Customer Relationship Management", MessageBoxButton.OK);
             }
         }
 
@@ -186,5 +202,18 @@ namespace Customer_Relationship_Management_Application
             CustomerStatusComboBox.SelectedItem = "Select";
             CommunicationChannelComboBox.SelectedItem = "Select";
         }
+
+        //Message box to display application about information
+        private void AboutMenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("Customer Relationship Management Application\nDeveloped by Austin Jeter\najeter10@gmail.com\n" + DateTime.Now.Year, "Customer Relationship Management Application", MessageBoxButton.OK);
+        }
+
+        //Close the application
+        private void ExitMenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
+
     }
 }

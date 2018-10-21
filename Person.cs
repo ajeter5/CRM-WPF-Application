@@ -8,25 +8,22 @@ namespace Customer_Relationship_Management_Application
 {
     class Person
     {
-        private int _id;
+        //Create name, age, gender, and email properties with private backing variables
         private string _name;
         private int _age;
-        private char _gender;
+        private string _gender;
         private string _email;
 
-        public int id { get => _id; set => _id = value; }
-        public string name { get => _name; set => _name = value; }
-        public int age { get => _age; set => _age = value; }
-        public char gender { get => _gender; set => _gender = value; }
-        public string email { get => _email; set => _email = value; }
+        public string Name { get => _name; set => _name = value; }
+        public int Age { get => _age; set => _age = value; }
+        public string Gender { get => _gender; set => _gender = value; }
+        public string Email { get => _email; set => _email = value; }
         
-        public Person()
+        public Person() { }
+        
+        //Constructor: Create a Person object
+        public Person(string name, int age, string gender, string email)
         {
-        }
-
-        public Person(int id, string name, int age, char gender, string email)
-        {
-            _id = id;
             _name = name;
             _age = age;
             _gender = gender;

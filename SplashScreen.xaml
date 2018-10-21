@@ -1,0 +1,18 @@
+﻿<Window x:Class="Customer_Relationship_Management_Application.SplashScreen"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Customer_Relationship_Management_Application"
+        mc:Ignorable="d"
+        Title="Customer Relationship Management Application" Height="361.098" Width="675.975">
+    <Grid>
+        <Label Content="Customer Relationship Management Application" FontSize="16" HorizontalAlignment="Left" Margin="288,10,0,0" VerticalAlignment="Top" Height="100" Width="368" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" />
+        <Image HorizontalAlignment="Left" Height="308" Margin="10,10,0,0" Source="CRM.png" VerticalAlignment="Top" Width="278"/>
+        <Label Content="Developed by Austin Jeter" HorizontalContentAlignment="Center" HorizontalAlignment="Left" Margin="288,115,0,0" VerticalAlignment="Top" Width="368"/>
+        <Label Content="ajeter10@gmail.com" HorizontalContentAlignment="Center" HorizontalAlignment="Left" Margin="288,146,0,0" VerticalAlignment="Top" Width="368"/>
+        <Label Content="2018" HorizontalContentAlignment="Center" HorizontalAlignment="Left" Margin="288,176,0,0" VerticalAlignment="Top" Width="368"/>
+        <Label Content="Version 2.0" HorizontalContentAlignment="Center" HorizontalAlignment="Left" Margin="288,207,0,0" VerticalAlignment="Top" Width="368"/>
+        <Label Content="Loading Application..." HorizontalContentAlignment="Right" HorizontalAlignment="Left" Margin="183,292,0,0" VerticalAlignment="Top" Width="473"/>
+    </Grid>
+</Window>

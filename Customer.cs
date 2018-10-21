@@ -8,27 +8,24 @@ namespace Customer_Relationship_Management_Application
 {
     class Customer : Person
     {
-        private int _accountNumber;
-        private CustomerStatusEnum _customerStatusEnum;
+        //customerStatus property with private backing field
+        private string _customerStatus;
+        public string CustomerStatus { get => _customerStatus; set => _customerStatus = value; }
+        
+        //Default constructor
+        public Customer() { }
 
-        public int accountNumber { get => _accountNumber; set => _accountNumber = value; }
-        public CustomerStatusEnum customerStatusEnum { get => _customerStatusEnum; set => _customerStatusEnum = value; }
-
-        public Customer()
+        //Constructor: Create a Customer object
+        public Customer(string name, int age, string gender, string email, string customerStatus) : base(name, age, gender, email)
         {
-
-        }
-
-        public Customer(int id, string name, int age, char gender, string email, CustomerStatusEnum customerStatusEnum) : base(id, name, age, gender, email)
-        {
-            _customerStatusEnum = customerStatusEnum;
+            _customerStatus = CustomerStatus;
         }
 
         public string Details()
         {
-            return string.Format("Customer {0}\n{1}\n{2}\n{3}\n{4}\n{5}", base.id, base.name, base.age, base.gender, base.email, _customerStatusEnum);
+            return string.Format("Customer {0}\n{1}\n{2}\n{3}\n{4}", base.Name, base.Age, base.Gender, base.Email, _customerStatus);
         }
-        
+
         public enum CustomerStatusEnum
         {
             Silver = 1,

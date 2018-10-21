@@ -12,4 +12,6 @@ C:\Users\ajete\source\repos\Customer Relationship Management Application\Custome
 C:\Users\ajete\source\repos\Customer Relationship Management Application\Customer Relationship Management Application\obj\Debug\Customer Relationship Management Application.csproj.CoreCompileInputs.cache
 C:\Users\ajete\source\repos\Customer Relationship Management Application\Customer Relationship Management Application\obj\Debug\Customer Relationship Management Application.exe
 C:\Users\ajete\source\repos\Customer Relationship Management Application\Customer Relationship Management Application\obj\Debug\Customer Relationship Management Application.pdb
+C:\Users\ajete\source\repos\Customer Relationship Management Application\Customer Relationship Management Application\obj\Debug\SplashScreen.g.cs
+C:\Users\ajete\source\repos\Customer Relationship Management Application\Customer Relationship Management Application\obj\Debug\SplashScreen.baml
 C:\Users\ajete\source\repos\Customer Relationship Management Application\Customer Relationship Management Application\obj\Debug\Customer Relationship Management Application.csprojAssemblyReference.cache
